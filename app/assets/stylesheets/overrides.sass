@@ -3,36 +3,21 @@
 @import "custom_bootstrap/variables"
 // this padding needs to be done before the responsive stuff is imported
 body
-  // modifying this for our promotional banner. can be replaced after if
-  // needed.
-  // padding-top: $navbar-height + 15px
   padding-top: $navbar-height
-
-
-//@import "bootstrap/responsive"
 
 // Font Awesome
 @import "font-awesome-sprockets"
 @import "font-awesome"
 
-// Glyphicons
-//@import "bootstrap/glyphicons"
-
-
 .list-inline > li.first
   padding-left: 0px
 
+.activity-list
+  list-style-type: none
+  padding: 0
+
 h2
   font-size: 150%
-
-
-//#subtitle
-//  color: lighten($brown, 30%)
-//  font-style: italic
-//  font-weight: normal
-//  margin-top: 0px
-//  padding-left: 1em
-//  padding-top: 0px
 
 h3
   font-size: 120%
@@ -52,6 +37,21 @@ h3
 .img-responsive
   max-width: 100%
   height: auto
+
+.profile-sidebar
+  margin-top: -5rem
+  .avatar
+    border-radius: 50%
+    border-radius: 50%
+    z-index: 2
+    position: relative
+
+.profile-activity
+  background: white
+  padding: 2em
+  margin-top: 2em
+  .container
+    width: 100%
 
 .sidebar
   border-left: 1px solid darken($beige, 10%)
@@ -92,10 +92,16 @@ p.stats
   display: flex
   flex: none
   flex-wrap: wrap
-  justify-content: space-between
+
+.card-row
+  display: grid
+  grid-template-columns: 50% 50%
+  grid-gap: 25px
+  grid-row-gap: 5px
 
 .member-thumbnail
   padding: .25em
+  margin: 1em
 
   div
     width: 5em
@@ -106,37 +112,47 @@ p.stats
   padding-left: 1em
   width: 15em
 
-.planting
-  dl.planting-attributes
-    font-size: 85%
+.progress
+  border-radius: 0
 
+.badge-super-late
+  background-color: $red
+.badge-harvest
+  background-color: $blue
+
+.planting-super-late
+.planting-late
+  background-color: $beige
+
+.planting
+  .planting-badges
+    position: absolute
+
+  .planting-thumbnail
+    padding: 0
+    border: 1px solid darken($beige, 10%)
+    border-radius: 4px
+  .planting-actions
+    top: -8em
+  .planting-name
+    position: relative
+    top: -1em
+
+  dl.planting-attributes
     dt
       text-align: left
     dd
       margin-left: auto
 
-@media (min-width: $screen-md-min)
-  .planting-thumbnail
-    dl.planting-attributes
-      font-size: 85%
-      width: 100%
-
-      dt
-        text-align: left
-        width: 80px
-      dd
-        padding-left: 80px
-        margin-left: auto
-
-  .navbar .navbar-form
-    width: 250px
-
+.layout-actions
+  width: 100%
 
 #placesmap, #cropmap
   height: 500px
 
 #membermap
   height: 250px
+  z-index: 0
 
 .location-not-set
   height: 250px
@@ -183,6 +199,8 @@ p.stats
   border: none
   text-align: center
   margin-bottom: 1.5em
+  max-width: 160px
+  max-height: 200px
 
   .member-thumbnail
     text-align: left
@@ -229,6 +247,9 @@ li.crop-hierarchy
 .navbar-bottom
   margin: 40px 0px 0px 0px !important
 
+.post-actions
+  margin-bottom: 1rem
+
 // footer
 footer
   #footer1, #footer2, #footer3
@@ -258,6 +279,7 @@ footer
 
 #maincontainer
   min-height: 80%
+  padding: 50px
 
 html, body
   height: 100%
@@ -276,24 +298,6 @@ html, body
   a
     font-weight: 800
 
-// Overrides applying only to mobile view. This must be at the end of the overrides file.
-
-@media only screen and (max-width: 767px)
-  .sidebar
-    margin-left: 0
-    border-left: none
-    padding-left: 0
-
-  #map
-    height: 300px
-
-  .navbar .nav > li
-    display: block
-
-  .navbar .navbar-form
-    width: 185px
-    padding-left: 0
-    padding-right: 0
 
 /* override "info" alert boxes to be green, not blue, on Growstuff */
 $state-info-text: darken($green, 10%)
@@ -319,9 +323,6 @@ $state-success-bg: lighten($green, 50%)
     text-overflow: ellipsis
     overflow: hidden
 
-#gardens_panel_body
-  height: 20em
-
 .form-group.required .control-label:before
   content: "* "
   color: red
@@ -336,3 +337,62 @@ $state-success-bg: lighten($green, 50%)
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
+
+ul.plantings
+  list-style-type: none
+
+ul.thumbnail-buttons
+  list-style-type: none
+  text-align: right
+
+
+.hover-wrapper .text
+  position: absolute
+  visibility: hidden
+
+.hover-wrapper:hover .text
+  visibility: visible
+
+.homepage-listing
+  padding-bottom: 6px
+
+@media (min-width: $screen-md-min)
+  .planting-thumbnail
+    dl.planting-attributes
+      width: 100%
+
+      dt
+        text-align: left
+        width: 120px
+      dd
+        padding-left: 120px
+        margin-left: auto
+
+  .navbar .navbar-form
+    width: 250px
+
+// Overrides applying only to mobile view. This must be at the end of the overrides file.
+@media only screen and (max-width: 767px)
+  .sidebar
+    margin-left: 0
+    border-left: none
+    padding-left: 0
+
+  #map
+    height: 300px
+
+  .navbar .nav > li
+    display: block
+
+  .navbar .navbar-form
+    width: 185px
+    padding-left: 0
+    padding-right: 0
+  .homepage
+    .thumbnail
+      height: 180px
+    .seed-thumbnail
+      height: 220px
+
+  #maincontainer
+    padding: 10px
